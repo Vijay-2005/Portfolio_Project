@@ -84,6 +84,23 @@ body {
 .menu-hamburguer {
   display: none;
 }
+.footer{
+  color: white;
+  text-align: center;
+ 
+  font-family: "Inter", sans-serif;
+  margin-top: 5rem;
+
+          
+}
+.footer a{
+  color: white;
+}
+
+.social{
+  padding: 10px 10px 10px 10px;
+
+}
 
 @media (max-width: 560px) {
   .navbar {
