@@ -1,3 +1,96 @@
+// Initialize interactive background particles
+function initParticles() {
+  const particlesContainer = document.getElementById('particles-background');
+  const codeSymbols = ['<>', '{}', '()', '[]', '//', '/*', '*/', ';;', '==', '=>', '&&', '||'];
+  const colors = ['#4169e1', '#6495ED', '#1E90FF', '#87CEFA', '#4682B4'];
+  
+  // Configuration for particles
+  const config = {
+    particleCount: 60,  // Adjust for performance
+    minSize: 3,
+    maxSize: 8,
+    minDuration: 15,  // Animation duration in seconds
+    maxDuration: 30,
+    codeParticleRate: 0.2, // 20% of particles will be code symbols
+    triangleRate: 0.15,    // 15% will be triangles
+    squareRate: 0.15       // 15% will be squares
+  };
+  
+  // Cleanup any existing particles
+  particlesContainer.innerHTML = '';
+  
+  // Create the particles
+  for (let i = 0; i < config.particleCount; i++) {
+    const particle = document.createElement('div');
+    
+    // Random properties
+    const size = Math.random() * (config.maxSize - config.minSize) + config.minSize;
+    const startX = Math.random() * 100; // random x position (%)
+    const startY = Math.random() * 100; // random y position (%)
+    const distanceX = (Math.random() - 0.5) * 50; // random horizontal movement
+    const distanceY = (Math.random() - 0.5) * 50; // random vertical movement
+    const duration = Math.random() * (config.maxDuration - config.minDuration) + config.minDuration;
+    const delay = Math.random() * 10; // random delay to start animation
+    const opacity = Math.random() * 0.5 + 0.1; // random opacity between 0.1 and 0.6
+    const scale = Math.random() * 1 + 0.5; // random scale between 0.5 and 1.5
+    const rotation = Math.random() * 360; // random rotation for non-circular particles
+    const color = colors[Math.floor(Math.random() * colors.length)];
+    
+    // Set CSS custom properties to be used in the animation
+    particle.style.setProperty('--size', `${size}px`);
+    particle.style.setProperty('--start-x', `${startX}vw`);
+    particle.style.setProperty('--start-y', `${startY}vh`);
+    particle.style.setProperty('--distance-x', `${distanceX}vw`);
+    particle.style.setProperty('--distance-y', `${distanceY}vh`);
+    particle.style.setProperty('--duration', `${duration}s`);
+    particle.style.setProperty('--delay', `${delay}s`);
+    particle.style.setProperty('--opacity', `${opacity}`);
+    particle.style.setProperty('--scale', `${scale}`);
+    particle.style.setProperty('--rotation', `${rotation}deg`);
+    particle.style.backgroundColor = color;
+    
+    // Determine particle type based on configured rates
+    const randomValue = Math.random();
+    
+    if (randomValue < config.codeParticleRate) {
+      // Code symbol particle
+      const symbol = codeSymbols[Math.floor(Math.random() * codeSymbols.length)];
+      particle.className = 'particle code';
+      particle.textContent = symbol;
+    } else if (randomValue < config.codeParticleRate + config.triangleRate) {
+      // Triangle particle
+      particle.className = 'particle triangle';
+      particle.style.borderColor = color;
+    } else if (randomValue < config.codeParticleRate + config.triangleRate + config.squareRate) {
+      // Square particle
+      particle.className = 'particle square';
+    } else {
+      // Default circle particle
+      particle.className = 'particle';
+    }
+    
+    // Set size for normal particles (code particles have their own sizing)
+    if (!particle.classList.contains('code')) {
+      particle.style.width = `${size}px`;
+      particle.style.height = `${size}px`;
+    }
+    
+    // Add to container
+    particlesContainer.appendChild(particle);
+  }
+}
+
+// Initialize particles on page load
+window.addEventListener('load', initParticles);
+
+// Reinitialize on window resize (debounced to avoid performance issues)
+let resizeTimer;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(initParticles, 250);
+});
+
+// Existing code continues below...
 const menuHamburguer = document.querySelector('.menu-hamburguer');
 const nav = document.querySelector('.navbar');
 const links = document.querySelectorAll('.navbar-links li a');
@@ -64,11 +157,17 @@ window.addEventListener('resize', () => {
 
 // Scroll handlers
 window.addEventListener('scroll', () => {
-  // Header background change
-  if (window.scrollY >= 200) {
-    header.style.background = '#191919'
+  // Header background change with blur effect
+  if (window.scrollY >= 50) {
+    header.classList.add('scrolled');
+    header.style.background = 'rgba(25, 25, 25, 0.8)';
+    header.style.backdropFilter = 'blur(10px)';
+    header.style.padding = '15px 40px';
   } else {
-    header.style.background = 'transparent'
+    header.classList.remove('scrolled');
+    header.style.background = 'transparent';
+    header.style.backdropFilter = 'blur(0px)';
+    header.style.padding = '20px 40px';
   }
   
   // Back to top button visibility
