@@ -529,6 +529,7 @@ body {
   margin: calc(0.8vw + 0.5rem);
   filter: brightness(.9);
   transition: all .3s ease;
+  border-radius: 8px; /* Changed from 50% to 8px for slightly rounded corners */
 }
 
 .links a {
