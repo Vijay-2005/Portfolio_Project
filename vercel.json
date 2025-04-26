@@ -1,0 +1,28 @@
+{
+  "version": 2,
+  "name": "vijay-portfolio",
+  "builds": [
+    { "src": "*.html", "use": "@vercel/static" },
+    { "src": "*.js", "use": "@vercel/static" },
+    { "src": "*.css", "use": "@vercel/static" },
+    { "src": "img/**", "use": "@vercel/static" },
+    { "src": "svg/**", "use": "@vercel/static" },
+    { "src": "public/**", "use": "@vercel/static" }
+  ],
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/$1" }
+  ],
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    }
+  ],
+  "github": {
+    "silent": true
+  }
+}
