@@ -36,16 +36,12 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-
   width: 100%;
-
   padding: 15px 30px;
   position: fixed;
-
-  background: 'transparent';
+  background: var(--color-grey); /* Changed from 'transparent' to solid color */
   transition: all .3s ease-out;
-
-  z-index: 2;
+  z-index: 10; /* Increased z-index to ensure it stays on top */
 }
 
 .header-title {
@@ -66,6 +62,7 @@ body {
 .navbar {
   max-width: 350px;
   width: 100%;
+  padding-right: 15px; /* Added right padding to prevent elements from touching the edge */
 }
 
 .navbar ul {
