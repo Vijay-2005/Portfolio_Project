@@ -90,53 +90,14 @@ window.addEventListener('resize', () => {
   resizeTimer = setTimeout(initParticles, 250);
 });
 
-// Existing code continues below...
+// Core UI elements
 const menuHamburguer = document.querySelector('.menu-hamburguer');
 const nav = document.querySelector('.navbar');
 const links = document.querySelectorAll('.navbar-links li a');
-
-let swiper = createSwiper(".mySwiper", ".swiper-pagination", ".swiper-button-next", ".swiper-button-prev");
-let header = document.getElementById('header');
+const header = document.getElementById('header');
 const backToTopButton = document.getElementById('back-to-top');
-const contactForm = document.getElementById('contact-form');
 const filterButtons = document.querySelectorAll('.filter-btn');
-const projectCards = document.querySelectorAll('.card-project');
-
-// Initialize swiper
-function createSwiper(container, pagination, nextButton, prevButton) {
-  return new Swiper(container, {
-    slidesPerView: handleWidth(),
-    spaceBetween: 30,
-    loop: true,
-    autoplay: {
-      delay: 5000,
-      disableOnInteraction: false,
-    },
-    pagination: {
-      el: pagination,
-      clickable: true,
-    },
-    navigation: {
-      nextEl: nextButton,
-      prevEl: prevButton,
-    },
-  });
-}
-
-function handleWidth() {
-  let getWidth = window.innerWidth || document.documentElement.clientWidth;
-  let slideShow = 3;
-
-  if (getWidth < 1001) {
-    slideShow = 2;
-  }
-
-  if (getWidth < 700) {
-    slideShow = 1;
-  }
-
-  return slideShow
-}
+const projectCards = document.querySelectorAll('.project-card');
 
 // Menu toggle
 menuHamburguer.addEventListener('click', () => {
@@ -159,12 +120,6 @@ document.addEventListener('click', (e) => {
     document.body.style.overflow = 'auto';
   }
 });
-
-// Resize handler
-window.addEventListener('resize', () => {
-  swiper.params.slidesPerView = handleWidth();
-  swiper.update();
-})
 
 // Scroll handlers
 window.addEventListener('scroll', () => {
@@ -190,7 +145,7 @@ window.addEventListener('scroll', () => {
   
   // Fade in elements on scroll
   fadeInElements();
-})
+});
 
 // Back to top button functionality
 if (backToTopButton) {
@@ -202,7 +157,7 @@ if (backToTopButton) {
   });
 }
 
-// Project filtering functionality
+// Project filtering functionality for grid layout
 if (filterButtons.length > 0) {
   filterButtons.forEach(button => {
     button.addEventListener('click', () => {
@@ -214,23 +169,26 @@ if (filterButtons.length > 0) {
       
       const filter = button.getAttribute('data-filter');
       
-      projectCards.forEach(card => {
+      // Add staggered animation effect
+      projectCards.forEach((card, index) => {
+        // Reset animation
+        card.style.animation = 'none';
+        card.offsetHeight; // Trigger reflow
+        
         if (filter === 'all' || card.getAttribute('data-category') === filter) {
           card.style.display = 'flex';
+          card.style.animation = `fadeIn 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards ${index * 0.1}s`;
         } else {
           card.style.display = 'none';
         }
       });
-      
-      // Update swiper after filtering
-      swiper.update();
     });
   });
 }
 
 // Add fade-in animation to elements
 function fadeInElements() {
-  const elements = document.querySelectorAll('.card-project, .box-about, .timeline-item, .footer-brand, .footer-links-column');
+  const elements = document.querySelectorAll('.project-card, .box-about, .timeline-item, .footer-brand, .footer-links-column');
   
   elements.forEach(element => {
     const position = element.getBoundingClientRect().top;
