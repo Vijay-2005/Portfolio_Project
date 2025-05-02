@@ -141,13 +141,24 @@ function handleWidth() {
 // Menu toggle
 menuHamburguer.addEventListener('click', () => {
   nav.classList.toggle('active');
+  document.body.style.overflow = nav.classList.contains('active') ? 'hidden' : 'auto';
 });
 
 links.forEach(item => {
   item.addEventListener('click', () => {
-    nav.classList.toggle('active');
-  })
-})
+    nav.classList.remove('active');
+    document.body.style.overflow = 'auto';
+  });
+});
+
+// Close menu when clicking outside
+document.addEventListener('click', (e) => {
+  const isMenuClick = e.target.closest('.navbar') || e.target.closest('.menu-hamburguer');
+  if (!isMenuClick && nav.classList.contains('active')) {
+    nav.classList.remove('active');
+    document.body.style.overflow = 'auto';
+  }
+});
 
 // Resize handler
 window.addEventListener('resize', () => {
