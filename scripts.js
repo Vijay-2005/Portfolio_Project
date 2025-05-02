@@ -228,33 +228,9 @@ if (filterButtons.length > 0) {
   });
 }
 
-// Contact form handling
-if (contactForm) {
-  contactForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const message = document.getElementById('message').value;
-    
-    // Basic validation
-    if (!name || !email || !message) {
-      alert('Please fill in all fields');
-      return;
-    }
-    
-    // Here you would typically send the form data to a server
-    // For now, just show a success message
-    alert('Thanks for your message! I will get back to you soon.');
-    
-    // Reset form
-    this.reset();
-  });
-}
-
 // Add fade-in animation to elements
 function fadeInElements() {
-  const elements = document.querySelectorAll('.card-project, .box-about, .contact-form-container, .timeline-item');
+  const elements = document.querySelectorAll('.card-project, .box-about, .timeline-item, .footer-brand, .footer-links-column');
   
   elements.forEach(element => {
     const position = element.getBoundingClientRect().top;
