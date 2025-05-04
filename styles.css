@@ -1939,3 +1939,108 @@ body {
   }
 }
 
+/* Enhanced Developer Journey Section */
+.tech-title {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+  font-size: calc(1.2vw + 1rem);
+  color: var(--color-white);
+}
+
+.tech-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.tech-badges span {
+  background: rgba(65, 105, 225, 0.1);
+  color: var(--color-white);
+  padding: 0.6rem 1.5rem;
+  border-radius: 20px;
+  font-size: 1.4rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(65, 105, 225, 0.2);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.tech-badges span:hover {
+  background: var(--gradient-primary);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(65, 105, 225, 0.3);
+}
+
+.about-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+}
+
+.about-content p {
+  font-size: calc(0.8vw + 0.6rem);
+  line-height: 1.8;
+  color: #e0e0e0;
+  opacity: 0.9;
+}
+
+.about-intro {
+  font-size: calc(0.9vw + 0.8rem) !important;
+  font-weight: 500;
+}
+
+.highlight {
+  color: var(--color-accent);
+  font-weight: 600;
+  position: relative;
+  display: inline-block;
+}
+
+.highlight::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--gradient-primary);
+  border-radius: 1px;
+}
+
+.about-description {
+  border-left: 3px solid var(--color-accent);
+  padding-left: 1.5rem;
+  font-style: italic;
+}
+
+.about-mission, .about-goal {
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 768px) {
+  .tech-title {
+    font-size: 2rem;
+  }
+  
+  .tech-badges {
+    gap: 0.8rem;
+  }
+  
+  .tech-badges span {
+    padding: 0.5rem 1.2rem;
+    font-size: 1.2rem;
+  }
+  
+  .about-content p {
+    font-size: 1.5rem;
+  }
+  
+  .about-intro {
+    font-size: 1.7rem !important;
+  }
+}
+
